@@ -10,6 +10,7 @@ const QrReader = () => {
   const videoEl = useRef(null);
   const qrBoxEl = useRef(null);
   const [qrOn, setQrOn] = useState(true);
+  const [scannedResult, setScannedResult] = useState("");
   const onScanSuccess = (result) => {
     console.log(result);
     setScannedResult(result?.data);
