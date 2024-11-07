@@ -10,9 +10,14 @@ const QrReader = () => {
   const videoEl = useRef(null);
   const qrBoxEl = useRef(null);
   const [qrOn, setQrOn] = useState(true);
-  const onScanSuccess = ()=>{}
+  const onScanSuccess = (result) => {
+    console.log(result);
+    setScannedResult(result?.data);
+  };
+
   const onScanFail = ()=>{}
   useEffect(() => {
+
     if (videoEl?.current && !scanner.current) {
       // 👉 Instantiate the QR Scanner
       scanner.current = new QrScanner(videoEl?.current, onScanSuccess, {
@@ -58,6 +63,19 @@ const QrReader = () => {
           className="qr-frame"
         /> */}
       </div>
+      {scannedResult && (
+        <p
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 99999,
+            color: "white",
+          }}
+        >
+          Scanned Result: {scannedResult}
+        </p>
+      )}
     </div>
   );
 }
